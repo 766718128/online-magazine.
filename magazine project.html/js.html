@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    .error { color: red; font-size: 14px; }
+    .form{
+        width: 60%;
+        background-color: rgb(238, 190, 220);
+        display: flex;
+        justify-content:center;
+        padding-top: 20px;
+        margin: auto;
+    border: solid 3px ;
+border-radius: 5px;}
+
+
+    input[type="text" ], 
+    input[type="email"], 
+    input[type="password"], 
+    input[type="number"] {
+    border-radius: 5px;
+    padding: 5px;
+    
+}
+h1{
+    text-align: center;
+}
+button{
+    align-items: center;
+    /* padding-left: ; */
+}
+.work{
+  display:flex
+}
+.work2{
+  display:flex
+}
+.form{
+  width: 60%;
+  max-width: 400px; /* Optional: restrict the maximum width */
+  background-color: rgb(238, 190, 220);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 3px solid;
+  border-radius: 5px;
+  display: flex;
+}
+
+
+  </style>
+</head>
+<body>
+   
+  <br><br><br><br><br><br><br>
+  <h1>Subscribe for more !!</h1>
+ <center> <div class="form">
+  <form id="myForm">
+    <label for="name" class="work2">Name:</label>
+    <input type="text" id="name" name="name" placeholder="Your Name" class="work">
+    <span id="nameError" class="error"></span><br><br>
+
+    <label for="email" class="work2">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Email" class="work">
+    <span id="emailError" class="error"></span><br><br>
+
+    <label for="password" class="work2">Password:</label>
+    <input type="password" id="password" name="password" placeholder="Set Password" class="work">
+    <span id="passwordError" class="error"></span><br><br>
+
+    <label for="age" class="work2">Age:</label>
+    <input type="number" id="age" name="age" placeholder="Your Age " class="work">
+    <span id="ageError" class="error"></span><br><br>
+
+    <center><button type="button" class="abc" onclick="validateForm()">Submit</button>
+  </form></div></center> 
+</center>
+
+  <script>
+    function validateForm() {
+      // Clear previous error messages
+      document.getElementById("nameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("passwordError").textContent = "";
+      document.getElementById("ageError").textContent = "";
+
+      let isValid = true;
+
+      // Name validation
+      const name = document.getElementById("name").value.trim();
+      if (name === "") {
+        document.getElementById("nameError").textContent = "Name is required.";
+        isValid = false;
+      }
+
+      // Email validation
+      const email = document.getElementById("email").value.trim();
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (email === "") {
+        document.getElementById("emailError").textContent = "Email is required.";
+        isValid = false;
+      } else if (!emailPattern.test(email)) {
+        document.getElementById("emailError").textContent = "Invalid email format.";
+        isValid = false;
+      }
+
+      // Password validation
+      const password = document.getElementById("password").value.trim();
+      if (password === "") {
+        document.getElementById("passwordError").textContent = "Password is required.";
+        isValid = false;
+      } else if (password.length < 6) {
+        document.getElementById("passwordError").textContent = "Password must be at least 6 characters long.";
+        isValid = false;
+      }
+
+      // Age validation
+      const age = document.getElementById("age").value.trim();
+      if (age === "") {
+        document.getElementById("ageError").textContent = "Age is required.";
+        isValid = false;
+      } else if (isNaN(age) || age <= 0) {
+        document.getElementById("ageError").textContent = "Age must be a positive number.";
+        isValid = false;
+      }
+
+      // If all validations pass
+      if (isValid) {
+        alert("Form submitted successfully!");
+      }
+    }
+  </script>
+</body>
+</html>
